@@ -106,16 +106,17 @@ public:
 		glDeleteVertexArrays(1, &vertex_array);
 	}
 
-	void render(vec3 translation) {
+	void render(vec3 translation, vec3 color) {
 		mat4 m4model = mat4::translation(translation);
 		glUniformMatrix4fv(um4model, 1, GL_FALSE, m4model);
+		glUniform3fv(uv3color, 1, color);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, 0);
 	}
-
+	
 	void preRender() {
 		glUseProgram(shader_program);
-		vec3 color = {1.0f, 0.8f, 0.5f};
-		glUniform3fv(uv3color, 1, color);
+		//vec3 color = {1.0f, 0.8f, 0.5f};
+		//glUniform3fv(uv3color, 1, color);
 		glBindVertexArray(vertex_array);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
 	}

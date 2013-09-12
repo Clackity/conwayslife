@@ -65,7 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ccube.h" />
+    <ClInclude Include="clife.h" />
     <ClInclude Include="headers.h" />
+    <ClInclude Include="macros.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
