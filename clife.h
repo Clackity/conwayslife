@@ -78,9 +78,8 @@ public:
 				} else {
 					if(live == 3) {
 						val = 255;
-					} 
-					else {
-						if(val > 0) { // a crude check for liveliness
+					} else {
+						if(val > 0 && val < 255 - faderate) { // a crude check for liveliness
 							changed = true;
 						}
 						val = val > faderate ? val - faderate : 0;

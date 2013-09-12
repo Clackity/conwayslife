@@ -67,7 +67,7 @@ public:
 			"uniform vec3 solid_color;"
 			"out vec3 color;"
 			"void main() {"
-			"	gl_Position = (projection_matrix * view_matrix * model_matrix) * vec4(vertex_position + vec3(0, 0, gl_InstanceID * 4.0), 1.0);"
+			"	gl_Position = (projection_matrix * view_matrix * model_matrix) * vec4(vertex_position, 1.0);"
 			"	color = solid_color;"
 			"}";
 		vertex_shader = glCreateShader(GL_VERTEX_SHADER);
