@@ -60,6 +60,7 @@ void mainFunc(int argc, unsigned short **argvw) {
 				glCullFace(GL_BACK);
 				glEnable(GL_DEPTH_TEST);
 				glDepthFunc(GL_LESS);
+				glfwSwapInterval(1);
 				
 				// render loop
 				while(!glfwWindowShouldClose(window)) {
@@ -77,8 +78,13 @@ void mainFunc(int argc, unsigned short **argvw) {
 							GLfloat yf = (GLfloat)y * 2.0f - GLfloat(height);
 							unsigned char val = life.getold(x, y);
 							if(val > 48) {
+								const vec3 colorlive = { 1, 1, 1 };
+								const vec3 colordead = { 0, 0, 0 };
+								const vec3 colordiff = colorlive - colordead;
 								GLfloat valf = (GLfloat)val / 255.0f;
-								cube.render(vec3::make(xf, yf, 0.0f), vec3::make(0.6f, 0.9f, 0.6f) * valf);
+								vec3 color = colordead + colordiff * valf;
+								color.r *= color.r;
+								cube.render(vec3::make(xf, yf, 0.0f), color);
 							}
 						}
 					}
