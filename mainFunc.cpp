@@ -46,7 +46,7 @@ void mainFunc(int argc, unsigned short **argvw) {
 				// todo
 			} else {
 				// prep for the render loop
-				unsigned int width = 200, height = width;
+				unsigned int width = 500, height = 400;
 
 				cLife life(width, height);
 				life.randomize();
@@ -66,7 +66,7 @@ void mainFunc(int argc, unsigned short **argvw) {
 				double frametime = 1.0 / 100.0; // just to get things started
 
 				std::list<std::vector<vec3>*> history;
-				unsigned int maxhistory = 32; // or ~whatever~
+				unsigned int maxhistory = 16; // or ~whatever~
 
 				// render loop
 				while(!glfwWindowShouldClose(window)) {
@@ -88,7 +88,7 @@ void mainFunc(int argc, unsigned short **argvw) {
 					if(!history.empty()) {
 						unsigned int whichlayer = 0;
 						for(std::list<std::vector<vec3>*>::iterator it = history.begin(); it != history.end(); ++it) {
-							cube.preRender(vec3::make((GLfloat)(maxhistory - whichlayer) / (GLfloat)maxhistory));
+							cube.preRender(vec3::make(0.1f + 0.6f * (GLfloat)(maxhistory - whichlayer) / (GLfloat)maxhistory));
 							std::vector<vec3> &layer = **it;
 							GLfloat zf = 2.0f * (GLfloat)++whichlayer;
 							for(unsigned int i = 0; i < layer.size(); ++i) {
@@ -129,6 +129,8 @@ void mainFunc(int argc, unsigned short **argvw) {
 
 					if(glfwGetKey(window, GLFW_KEY_SPACE)) {
 						life.randomize();
+					} else if(glfwGetKey(window, GLFW_KEY_0)) {
+						life.special(0);
 					} else {
 						life.iterate();
 					}

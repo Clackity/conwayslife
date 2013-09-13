@@ -117,12 +117,20 @@ union mat4 {
 		return _product;
 	}
 	static mat4 projectionrh(GLfloat near = 1.0f, GLfloat far = 1000.0f, GLfloat fov = 1.221730f, GLfloat aspect = (4.0f / 3.0f)) {
-		GLfloat range = tan(fov * 0.5f) * near;
-		GLfloat sx = (2.0f * near) / (range * aspect + range * aspect);
-		GLfloat sy = near / range;
-		GLfloat sz = -(far + near) / (far - near);
-		GLfloat pz = -(2.0f * far * near) / (far - near);
-		mat4 _projection = { sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, sz, -1, 0, 0, pz, 0 };
+		//GLfloat range = tan(fov * 0.5f) * near;
+		//GLfloat sx = (2.0f * near) / (range * aspect + range * aspect);
+		//GLfloat sy = near / range;
+		//GLfloat sz = -(far + near) / (far - near);
+		//GLfloat pz = -(2.0f * far * near) / (far - near);
+		//mat4 _projection = { sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, sz, -1, 0, 0, pz, 0 };
+		GLfloat yScale = 1.0f / tan(fov / 2.0f);
+		GLfloat xScale = yScale / aspect;
+		mat4 _projection = {
+			xScale, 0, 0, 0,
+			0, yScale, 0, 0,
+			0, 0, near / (near - far), -1,
+			0, 0, near * far / (near - far), 0
+		};
 		return _projection;
 	}
 	static mat4 rotationx(GLfloat angle) {
