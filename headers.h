@@ -12,6 +12,8 @@
 
 // standard library stuff
 #include <cmath>
+#include <list>
+#include <vector>
 
 // my own stuff
 #include "types.h"

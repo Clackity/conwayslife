@@ -53,6 +53,7 @@
       <CompileAsManaged>false</CompileAsManaged>
       <PreprocessorDefinitions>MSWINDOWS</PreprocessorDefinitions>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <AssemblerOutput>NoListing</AssemblerOutput>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>false</GenerateDebugInformation>
