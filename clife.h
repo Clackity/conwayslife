@@ -142,16 +142,14 @@ public:
 		unsigned int bias = MAX(1, MIN(999, bias_in_thousandths));
 		for(unsigned int y = height / 3; y < (height * 2) / 3; ++y) {
 			for(unsigned int x = width / 3; x < (width * 2) / 3; ++x) {
-				//if((rand() % 1000) >= bias)
 				if((rand() % 1000) >= bias) setlive(x, y);
-				//setold(x, y, rand() % 1000 >= bias ? LIVE : DEAD);
 			}
 		}
 		stalled = false;
 	}
 
 private:
-	void cosperglider(unsigned int x, unsigned int y) {
+	void gosperglider(unsigned int x, unsigned int y) {
 		if(x + 37 >= width || y + 11 >= height) return; // not enough room
 		for(unsigned int _y = y; _y < y + 11; ++_y) {
 			for(unsigned int _x = x; _x < x + 37; ++_x) {
@@ -199,12 +197,73 @@ private:
 		setlive(x + 36, y + 7);
 
 	}
+
+	void acorn(unsigned int x, unsigned int y) {
+		if(x + 9 >= width || y + 5 >= height) return; // not enough room
+		for(unsigned int _y = y; _y < y + 11; ++_y) {
+			for(unsigned int _x = x; _x < x + 37; ++_x) {
+				setold(_x, _y, DEAD);
+			}
+		}
+		setlive(x + 1, y + 1);
+		setlive(x + 2, y + 1);
+		setlive(x + 5, y + 1);
+		setlive(x + 6, y + 1);
+		setlive(x + 7, y + 1);
+		setlive(x + 4, y + 2);
+		setlive(x + 2, y + 3);
+	}
+
+	void diehard(unsigned int x, unsigned int y) {
+		if(x + 10 >= width || y + 5 >= height) return; // not enough room
+		for(unsigned int _y = y; _y < y + 11; ++_y) {
+			for(unsigned int _x = x; _x < x + 37; ++_x) {
+				setold(_x, _y, DEAD);
+			}
+		}
+		setlive(x + 2, y + 1);
+		setlive(x + 1, y + 2);
+		setlive(x + 2, y + 2);
+
+		setlive(x + 6, y + 1);
+		setlive(x + 7, y + 1);
+		setlive(x + 8, y + 1);
+		setlive(x + 7, y + 3);
+	}
+
+	void rpentomino(unsigned int x, unsigned int y) {
+		if(x + 5 >= width || y + 5 >= height) return; // not enough room
+		for(unsigned int _y = y; _y < y + 11; ++_y) {
+			for(unsigned int _x = x; _x < x + 37; ++_x) {
+				setold(_x, _y, DEAD);
+			}
+		}
+		setlive(x + 2, y + 1);
+		setlive(x + 1, y + 2);
+		setlive(x + 2, y + 2);
+		setlive(x + 2, y + 3);
+		setlive(x + 3, y + 3);
+	}
+
 public:
 	void special(unsigned char which) {
 		switch(which) {
 			case 0:
+				if(width <= 37 || height <= 11) break;
 				clear();
-				cosperglider(10, 10);
+				gosperglider((width - 37) / 2, (height - 11) / 2);
+				break;
+			case 1:
+				clear();
+				acorn((width - 9) / 2, (height - 5) / 2);
+				break;
+			case 2:
+				clear();
+				diehard((width - 10) / 2, (height - 5) / 2);
+				break;
+			case 3:
+				clear();
+				rpentomino((width - 5) / 2, (height - 5) / 2);
 				break;
 			default:
 				randomize();

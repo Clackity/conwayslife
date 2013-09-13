@@ -46,7 +46,7 @@ void mainFunc(int argc, unsigned short **argvw) {
 				// todo
 			} else {
 				// prep for the render loop
-				unsigned int width = 500, height = 400;
+				unsigned int width = 400, height = 300;
 
 				cLife life(width, height);
 				life.randomize();
@@ -66,7 +66,7 @@ void mainFunc(int argc, unsigned short **argvw) {
 				double frametime = 1.0 / 100.0; // just to get things started
 
 				std::list<std::vector<vec3>*> history;
-				unsigned int maxhistory = 16; // or ~whatever~
+				unsigned int maxhistory = 64; // or ~whatever~
 
 				// render loop
 				while(!glfwWindowShouldClose(window)) {
@@ -131,6 +131,12 @@ void mainFunc(int argc, unsigned short **argvw) {
 						life.randomize();
 					} else if(glfwGetKey(window, GLFW_KEY_0)) {
 						life.special(0);
+					} else if(glfwGetKey(window, GLFW_KEY_1)) {
+						life.special(1);
+					} else if(glfwGetKey(window, GLFW_KEY_2)) {
+						life.special(2);
+					} else if(glfwGetKey(window, GLFW_KEY_3)) {
+						life.special(3);
 					} else {
 						life.iterate();
 					}
