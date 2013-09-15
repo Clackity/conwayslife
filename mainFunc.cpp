@@ -79,9 +79,10 @@ void mainFunc(int argc, unsigned short **argvw) {
 					GLfloat updown = sin(time / 3.1456) * 0.1f;
 					GLfloat scale = 1.0f / width;
 					view_matrix = mat4::scale(vec3::make(scale));
-					view_matrix = mat4::multiply(view_matrix, mat4::translation(vec3::make(0, 0, 1.5f)));
+					view_matrix = mat4::multiply(view_matrix, mat4::translation(vec3::make(0, 0, -1.5f)));
 					view_matrix = mat4::multiply(mat4::rotationy(leftright), view_matrix);
 					view_matrix = mat4::multiply(mat4::rotationx(updown), view_matrix);
+
 					cube.setViewMatrix(view_matrix);
 					
 					std::vector<vec3> *player = nullptr;
@@ -90,7 +91,7 @@ void mainFunc(int argc, unsigned short **argvw) {
 						for(std::list<std::vector<vec3>*>::iterator it = history.begin(); it != history.end(); ++it) {
 							cube.preRender(vec3::make(0.1f + 0.6f * (GLfloat)(maxhistory - whichlayer) / (GLfloat)maxhistory));
 							std::vector<vec3> &layer = **it;
-							GLfloat zf = 2.0f * (GLfloat)++whichlayer;
+							GLfloat zf = -2.0f * (GLfloat)++whichlayer;
 							for(unsigned int i = 0; i < layer.size(); ++i) {
 								vec3 &location = layer[i];
 								location.z = zf;

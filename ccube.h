@@ -107,6 +107,7 @@ public:
 	}
 
 	void render(vec3 translation) {
+		//translation.z -= 200.0f;
 		mat4 m4model = mat4::translation(translation);
 		glUniformMatrix4fv(um4model, 1, GL_FALSE, m4model);
 		//glUniform3fv(uv3color, 1, color);

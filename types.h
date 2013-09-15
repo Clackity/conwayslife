@@ -66,19 +66,12 @@ union vec4 {
 // mat4
 ////////
 union mat4 {
-	//struct {
-	//	GLfloat a, e, i, m;
-	//	GLfloat b, f, j, n;
-	//	GLfloat c, g, k, o;
-	//	GLfloat d, h, l, p;
-	//};
 	struct {
 		GLfloat a, b, c, d;
 		GLfloat e, f, g, h;
 		GLfloat i, j, k, l;
 		GLfloat m, n, o, p;
 	};
-	struct { vec4 c1, c2, c3, c4; };
 	GLfloat fl[16];
 
 	static mat4 identity() { mat4 _identity = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 }; return _identity; }
@@ -175,7 +168,7 @@ union mat4 {
 		};
 		return _scale;
 	}
-	static mat4 translation(vec3 v) { mat4 _translation = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -v.x, -v.y, -v.z, 1 }; return _translation; }
+	static mat4 translation(vec3 v) { mat4 _translation = { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, v.x, v.y, v.z, 1 }; return _translation; }
 
 	operator GLfloat* () { return fl; }
 };
