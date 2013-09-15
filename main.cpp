@@ -1,4 +1,4 @@
-// @version 2013.09.08.1152
+// @version 2013.09.12.2355
 // @author Atlee Brink
 /*
 	implements main or WinMain
